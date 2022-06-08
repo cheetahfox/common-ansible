@@ -1,0 +1,93 @@
+---
+- name: Change default bash prompt for all new users
+  template: 
+    src: bashrc 
+    dest: /etc/skel/.bashrc 
+    mode: "u=rw,g=r,o=r"
+  tags:
+    - common
+
+- name: Change default bash prompt for ubuntu
+  template: 
+    src: bashrc 
+    dest: "/home/{{ local_admin_user }}/.bashrc" 
+    mode: "u=rw,g=r,o=r"
+  tags:
+    - common
+
+- name: Change default bash prompt for root
+  template: 
+    src: bashrc 
+    dest: /root/.bashrc 
+    mode: "u=rw,g=r,o=r"
+  tags:
+    - common
+
+- name: Set it so the hostname resovles
+  template: 
+    src: hosts 
+    dest: /etc/hosts 
+    mode: "u=rw,g=r,o=r"
+  tags:
+    - common
+
+- name: Change sshd defaults
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "bionic"
+  template: 
+    src: sshd_config 
+    dest: /etc/ssh/sshd_config 
+    mode: "u=rw,g=r,o=r"
+  register: sshd_config
+  tags:
+    - common
+
+- name: Restart sshd if needed
+  when: sshd_config is changed
+  service: 
+    name: sshd
+    state: restarted
+  tags:
+    - common
+
+- name: Update all packages
+  apt: upgrade=dist
+  tags:
+    - common
+
+- name: Install common software packages for 18.04
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "bionic"
+  apt: 
+    name: ['ntp', 'vim', 'python-pip', 'python3', 'python3-pip', 'nmon', 'mbuffer', 'htop', 'pbzip2', 'ipcalc', 'linux-generic-hwe-18.04', 'traceroute']
+    state: present
+  tags:
+    - common
+
+- name: Install common software packages for 20.04
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "focal"
+  apt: 
+    name: ['python3', 'python3-pip', 'vim', 'nmon', 'mbuffer', 'htop', 'pbzip2', 'ipcalc', 'linux-generic-hwe-20.04', 'traceroute', 'wireguard', 'net-tools']
+    state: present
+  tags:
+    - common
+
+- name: Install common software packages for 22.04      
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "jammy"
+  apt: 
+    name: ['python3', 'python3-pip', 'vim', 'nmon', 'mbuffer', 'htop', 'pbzip2', 'ipcalc', 'linux-generic-hwe-22.04', 'traceroute', 'wireguard', 'net-tools']
+    state: present
+  tags:
+    - common
+
+- name: Install common pip packages 
+  pip: 
+    name: ['speedtest-cli']
+    state: present
+  tags:
+    - common
+
+- name: Allow the system to reboot after a kernel panic
+  sysctl:
+    name: kernel.panic
+    value: '10'    
+  tags:
+    - common
