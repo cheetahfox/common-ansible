@@ -49,6 +49,14 @@
   tags:
     - common
 
+- name: Update Apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+    force_apt_get: true    
+  tags:
+    - common
+
 - name: Update all packages
   apt: upgrade=dist
   tags:
