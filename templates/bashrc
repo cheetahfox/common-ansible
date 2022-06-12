@@ -127,6 +127,10 @@ fi
 if [ -f /usr/bin/kubectl ]; then
   source <(/usr/bin/kubectl completion bash)
 fi
+# If it's k3s it's going to be in /usr/local/bin/kubectl
+if [ -f /usr/local/bin/kubectl ]; then
+  source <(/usr/local/bin/kubectl completion bash)
+fi
 
 if [ -f $HOME/.kube/admin.conf ]; then
   export KUBECONFIG=$HOME/.kube/admin.conf
