@@ -7,7 +7,7 @@
   tags:
     - common
 
-- name: Change default bash prompt for ubuntu
+- name: Change default bash prompt for local admin user
   template: 
     src: bashrc 
     dest: "/home/{{ local_admin_user }}/.bashrc" 
@@ -20,6 +20,12 @@
     src: bashrc 
     dest: /root/.bashrc 
     mode: "u=rw,g=r,o=r"
+  tags:
+    - common
+
+- name: Update running hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"  
   tags:
     - common
 
