@@ -152,3 +152,7 @@ if [ -f /usr/local/go/bin/go ]; then
   export PATH=$PATH:$GOPATH/bin/
   export PATH=$PATH:/usr/local/go/bin/
 fi
+
+if [ -f ~/.local/bin ]; then
+   export PATH=$PATH:~/.local/bin
+fi   
