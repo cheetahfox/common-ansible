@@ -105,3 +105,13 @@
     value: '10'    
   tags:
     - common
+
+- name: Tune some sysctl settings
+  sysctl:
+    name: "{{ item.name}}"
+    value: "{{ item.value}}"
+    state: present
+    sysctl_set: yes
+  with_items:
+    - { name: 'fs.inotify.max_user_watches', value: '524288' }
+    - { name: 'fs.inotify.max_user_instances', value: '1280' }
