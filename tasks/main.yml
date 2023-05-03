@@ -87,7 +87,7 @@
 - name: Install common software packages for 22.04      
   when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "jammy"
   apt: 
-    name: ['python3', 'python3-pip', 'vim', 'nmon', 'mbuffer', 'htop', 'pbzip2', 'ipcalc', 'linux-generic-hwe-22.04', 'traceroute', 'wireguard', 'net-tools', 'fatrace']
+    name: ['python3', 'python3-pip', 'vim', 'nmon', 'mbuffer', 'htop', 'iotop', 'pbzip2', 'ipcalc', 'linux-generic-hwe-22.04', 'traceroute', 'wireguard', 'net-tools', 'fatrace']
     state: present
   tags:
     - common
