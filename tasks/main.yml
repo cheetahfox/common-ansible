@@ -100,13 +100,6 @@
   tags:
     - common
 
-- name: Install common pip packages 
-  pip: 
-    name: ['speedtest-cli']
-    state: present
-  tags:
-    - common
-
 - name: Allow the system to reboot after a kernel panic
   sysctl:
     name: kernel.panic
