@@ -92,6 +92,14 @@
   tags:
     - common
 
+- name: Remove common software packages for 24.04
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "noble"
+  apt: 
+    name: ['unattended-upgrades']
+    state: absent
+  tags:
+    - common
+
 - name: Install common software packages for 24.04      
   when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "noble"
   apt: 
