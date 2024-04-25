@@ -103,7 +103,7 @@
 - name: Install common software packages for 24.04      
   when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "noble"
   apt: 
-    name: ['python3', 'python3-pip', 'jq', 'vim', 'nmon', 'mbuffer', 'screen', 'htop', 'iotop', 'pbzip2', 'ipcalc', 'traceroute', 'wireguard', 'net-tools', 'fatrace', 'smartmontools', 'nvme-cli', 'freeipmi-tools']
+    name: ['python3', 'python3-pip', 'podman', 'jq', 'vim', 'nmon', 'mbuffer', 'screen', 'htop', 'iotop', 'pbzip2', 'ipcalc', 'traceroute', 'wireguard', 'net-tools', 'fatrace', 'smartmontools', 'nvme-cli', 'freeipmi-tools']
     state: present
   tags:
     - common
