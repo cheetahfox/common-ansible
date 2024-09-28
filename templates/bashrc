@@ -141,6 +141,16 @@ if [ -f /usr/local/bin/helm ]; then
   source <(helm completion bash)
 fi
 
+# if Kubecolor is installed alias kubectl
+if [ -f /home/linuxbrew/.linuxbrew/bin/kubecolor ]; then
+        alias kubectl="/home/linuxbrew/.linuxbrew/bin/kubecolor"
+        complete -o default -F __start_kubectl kubecolor
+fi
+
+if [ -f /home/linuxbrew/.linuxbrew/bin/k9s ]; then
+        alias k9s="k9s -A"
+fi
+
 # If go is installed set the GOPATH
 if [ -f /usr/local/go/bin/go ]; then
   export GOPATH=$HOME/go/
