@@ -30,10 +30,11 @@
     - common
 
 - name: Set it so the hostname resovles
-  template: 
-    src: hosts 
+  lineinfile:
     dest: /etc/hosts 
     mode: "u=rw,g=r,o=r"
+    line: `127.0.0.1 {{ hostname }} localhost localhost.localdomain`
+    state: present
   tags:
     - common
 
