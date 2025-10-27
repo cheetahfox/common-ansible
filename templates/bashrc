@@ -63,7 +63,7 @@ parse_git_branch() {
 
 if [ "$color_prompt" = yes ]; then
     if [[ ${EUID} == 0 ]] ; then
-                PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+		PS1='\[\e]0;\a\]\[\e[91m\]\h\[\e[0m\]: \[\e[92m\]\w\a\[\e[0m\]\[\e[38;5;139m\]$(parse_git_branch)\[\e[0m\]# '
         else
                 PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[35m\]\$(parse_git_branch)\[\033[00m\]\[\033[00m\]$ "
     fi
