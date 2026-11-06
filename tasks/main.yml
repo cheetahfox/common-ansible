@@ -29,14 +29,6 @@
   tags:
     - common
 
-- name: Set it so the hostname resovles
-  lineinfile:
-    dest: /etc/hosts 
-    line: "127.0.0.1 {{ hostname }} localhost localhost.localdomain"
-    state: present
-  tags:
-    - common
-
 - name: Change sshd defaults
   when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "bionic"
   template: 
